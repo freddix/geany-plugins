@@ -1,11 +1,11 @@
 Summary:	Plugins for Geany
 Name:		geany-plugins
-Version:	1.23
-Release:	2
+Version:	1.24
+Release:	1
 License:	GPL v2+
 Group:		Development/Tools
 Source0:	http://plugins.geany.org/geany-plugins/%{name}-%{version}.tar.bz2
-# Source0-md5:	d851dbdaf95fb8b74ece43c0a973b748
+# Source0-md5:	5ac59e2693bf61d4df94892aeddbd13e
 URL:		http://www.geany.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -36,7 +36,7 @@ Plugins for Geany.
 export CONFIG_SHELL=/bin/bash
 %{__intltoolize}
 %{__libtoolize}
-%{__aclocal} -I build -I build/cache
+%{__aclocal} -I build -I build/cache -I build/bundled -I geanypy/m4
 %{__autoheader}
 %{__autoconf}
 %{__automake}
@@ -53,6 +53,11 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/geany/*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/geany-plugins/*/*.la
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
+
+%py_comp $RPM_BUILD_ROOT%{_libdir}/geany/geanypy
+%py_comp $RPM_BUILD_ROOT%{_libdir}/geany/geanypy
+%py_ocomp $RPM_BUILD_ROOT%{_datadir}/geany/geanypy
+%py_ocomp $RPM_BUILD_ROOT%{_datadir}/geany/geanypy
 
 %find_lang %{name}
 
@@ -77,6 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/debugger
 %{_datadir}/%{name}/geanygendoc/filetypes
 %{_datadir}/%{name}/geanylua
+%{_datadir}/%{name}/pohelper
 %{_datadir}/%{name}/scope
+%{_datadir}/geany/geanypy
+%{_libdir}/geany/geanypy
 %{_iconsdir}/hicolor/*/apps/gproject-*.png
 
